@@ -1,0 +1,20 @@
+<div class="row">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="col-4 mat-elevation-z3 p-3 mt-3 mx-auto">
+    <mat-form-field class="d-block">
+      <input matInput type="text" placeholder="Username" formControlName="username" required>
+      <mat-error *ngIf="loginForm.controls['username'].hasError('required')">
+        Username is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="d-block">
+      <input matInput type="password" placeholder="Password" formControlName="password" required>
+      <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <div class="row">
+      <button mat-raised-button type="submit" color="primary" [disabled]="!loginForm.valid" class="col-4 mx-auto">Login</button>
+    </div>
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+  </form>
+</div>

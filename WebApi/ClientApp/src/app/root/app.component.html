@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span [routerLink]="['']" style="cursor: pointer;" class="mr-2">LOGO</span>
+    <span class="flex-fill">Reflexartig Leicht</span>
+    <button mat-raised-button color="accent" *ngIf="(currentUser$ | async)?.token" (click)="logout()">Logout</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="container-fluid">
+  <router-outlet></router-outlet>
+</div>

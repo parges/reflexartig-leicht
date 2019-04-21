@@ -1,0 +1,32 @@
+https://webapi20190421025740.azurewebsites.net/
+
+Todo next:
+
+- Login machen
+- Umleitung nach Add
+
+Todo:
+- Bilder hochladen
+- Alter rechnet falsch?
+- Dashboard Hübsch machen
+- patienten Tabelle suchbar machen
+- Patienten Get / Add
+  - Anschrift
+- neue Kachel
+  - Unbezahlte Termine --> Tabelle aller Kunden die etwas unbezahltes haben - bei Auswahl in Fallübersicht Dokument springen
+  - Statistiken
+    - Säulendiagramm Button bei Testung Ergebniszusammenfassung
+- Testung:
+  - Ergebniszusammenfassung füllen nach Speichern (Kapitelwerte)
+  - Ergebniszusammenfassung die Werte sind keine Fragen, alle werden errechnet
+Dokumente:
+- Drucken aller Dokumente (Formulare)
+- Herunterladen aller Druckvorlagen
+Später:
+- Einscannen / Hochladen von Bildern (Rezepten)
+
+
+
+Info:
+Tabellen Aktionen pro row --> https://www.sitepoint.com/angular-material-design-components/
+Bilder hochladen --> http://dotnetdetail.net/how-to-upload-file-using-angular-6-and-asp-net-core-2-1-web-api/

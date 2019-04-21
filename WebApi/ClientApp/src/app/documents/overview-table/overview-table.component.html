@@ -1,0 +1,20 @@
+<!-- <div class="document-container mat-elevation-z8">
+  <div class="document-loading-shade"
+  *ngIf="isLoadingResults || isRateLimitReached">
+<mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+<div class="document-rate-limit-reached" *ngIf="isRateLimitReached">
+ keine Datensätze gefunden
+</div>
+</div> -->
+
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" class="document-table"
+           matSort matSortActive="id" matSortDisableClear matSortDirection="asc">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let row">{{row.name}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDocument(row.id, $event)"></tr>
+    </table>
+  </div>

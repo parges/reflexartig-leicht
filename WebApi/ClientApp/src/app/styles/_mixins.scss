@@ -1,0 +1,14 @@
+@mixin mat-grid-mixin($theme) {
+  $primary: map-get($map: $theme, $key: primary);
+  $accent: map-get($map: $theme, $key: accent);
+
+  mat-grid-tile {
+    background-color: mat-color($primary, 500);
+    color: mat-contrast($primary, 500);
+    cursor: pointer;
+
+    &:hover {
+      background-color: mat-color($primary, 400);
+    }
+  }
+}

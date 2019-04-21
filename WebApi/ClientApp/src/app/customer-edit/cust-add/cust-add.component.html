@@ -1,0 +1,28 @@
+<form [formGroup]="addCustForm" (ngSubmit)="onFormSubmit()" class="form-container" >
+  <mat-form-field>
+      <input formControlName="firstname" matInput placeholder="Vorname">
+  </mat-form-field>
+  <mat-error>
+      <span *ngIf="!addCustForm.get('firstname').valid && addCustForm.get('firstname').touched">Bitte Vornamen eingeben</span>
+  </mat-error>
+  <mat-form-field>
+      <input formControlName="lastname" matInput placeholder="Nachname">
+  </mat-form-field>
+  <mat-error>
+      <span *ngIf="!addCustForm.get('lastname').valid && addCustForm.get('lastname').touched">Bitte Nachnamen eingeben</span>
+  </mat-error>
+  <mat-form-field>
+      <input formControlName="tele" matInput placeholder="Telefonnummer">
+  </mat-form-field>
+  <mat-error>
+      <span *ngIf="!addCustForm.get('tele').valid && addCustForm.get('tele').touched">Bitte Telefonnummer eingeben</span>
+  </mat-error>
+
+  <mat-form-field>
+      <input matInput formControlName="birthday" [matDatepicker]="picker" placeholder="Geburtstag wählen">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker></mat-datepicker>
+    </mat-form-field>
+
+  <button mat-raised-button color="accent" [disabled]="!addCustForm.valid">Anlegen</button>
+</form>

@@ -1,0 +1,44 @@
+<form [formGroup]="regiForm" class="form-container" (ngSubmit)="onSubmit()" >
+    <input formControlName="id" matInput placeholder="id" hidden>
+  <mat-form-field>
+      <input formControlName="firstname" matInput placeholder="Vorname">
+  </mat-form-field>
+  <mat-error>
+      <span *ngIf="!regiForm.get('firstname').valid && regiForm.get('firstname').touched">Bitte Vornamen eingeben</span>
+  </mat-error>
+  <mat-form-field>
+      <input formControlName="lastname" matInput placeholder="Nachname">
+  </mat-form-field>
+  <mat-error>
+      <span *ngIf="!regiForm.get('lastname').valid && regiForm.get('lastname').touched">Bitte Nachnamen eingeben</span>
+  </mat-error>
+    <mat-form-field>
+        <input formControlName="tele" matInput placeholder="Telefonnummer">
+    </mat-form-field>
+    <mat-error>
+        <span *ngIf="!regiForm.get('tele').valid && regiForm.get('tele').touched">Bitte Telefonnummer eingeben</span>
+    </mat-error>
+  <mat-form-field>
+      <input matInput formControlName="birthday" [matDatepicker]="picker" placeholder="Geburtstag wählen">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input formControlName="age" matInput placeholder="Alter">
+</mat-form-field>
+
+  <!-- <button mat-stroked-button color="primary" class="imgUploader" (click)="fileInput.click()">Bild</button> -->
+  <!-- <app-upload userId={{id}}></app-upload> -->
+  <div class="form-group">
+    <label for="avatar">Avatar</label>
+    <input type="file" #uploader class="form-control" (change)="fileChange(uploader.files)" placeholder="Upload Avatar">
+</div>
+<img [src]="imageToShow"
+     alt="Place image title"
+     >
+
+<hr>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!regiForm.valid">Speichern</button>
+  <button mat-button color="warn" [disabled]="!regiForm.valid" (click)="onDeleteCustomer()">Löschen</button>
+</form>

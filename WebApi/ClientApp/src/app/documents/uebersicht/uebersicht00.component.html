@@ -1,0 +1,144 @@
+<button mat-raised-button (click)="openDialog()" class="m-b-5 full-with-field">Patienten wählen</button>
+<!-- <form class="example-form">
+<mat-form-field>
+    <input matInput placeholder="Patient" aria-label="Patient" [matAutocomplete]="auto" [formControl]="myControl">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let patient of filteredPatients | async" [value]="patient.firstname">
+        <!-- <img class="example-option-img" aria-hidden [src]="patient" height="25"> -->
+        <!-- <span>{{patient.firstname}}</span> |
+        <!-- <small>Population: {{patient.lastname}}</small> -->
+      <!-- </mat-option>
+    </mat-autocomplete>
+</mat-form-field>
+</form> -->
+
+<h2>Patienten Informationen</h2>
+<form [formGroup]="docUebersicht" (ngSubmit)="onDocSubmit()" class="form-container" >
+  <!-- Vorname -->
+  <mat-form-field>
+      <input formControlName="firstname" matInput placeholder="Vorname">
+  </mat-form-field>
+  <!-- Nachname -->
+  <mat-form-field>
+      <input formControlName="lastname" matInput placeholder="Nachname">
+  </mat-form-field>
+  <!-- Geburtstag -->
+  <mat-form-field>
+    <input matInput formControlName="birthday" [matDatepicker]="picker" placeholder="Geburtstag">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #picker></mat-datepicker>
+  </mat-form-field>
+  <!-- Adresse -->
+  <mat-form-field>
+    <input formControlName="address" matInput placeholder="Adresse">
+  </mat-form-field>
+  <!-- Telefonnummer -->
+  <mat-form-field>
+      <input formControlName="tele" matInput placeholder="Telefonnummer">
+  </mat-form-field>
+
+  <h2>Terminübersicht</h2>
+  <div class="m-t-15">
+    <mat-accordion class="form-accordion">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Anamnese
+          </mat-panel-title>
+          <div *ngIf="docUebersicht.controls.anamneseDate.value">
+            <mat-panel-description>
+              durchgeführt am - {{ docUebersicht.controls.anamneseDate.value | date }}
+            </mat-panel-description>
+          </div>
+        </mat-expansion-panel-header>
+        <mat-form-field class="full-with-field">
+            <input matInput formControlName="anamneseDate" [matDatepicker]="anamnesePicker" placeholder="Datum">
+            <mat-datepicker-toggle matSuffix [for]="anamnesePicker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #anamnesePicker></mat-datepicker>
+        </mat-form-field>
+        <mat-checkbox formControlName="anamnesePayed" class="full-with-field">bezahlt</mat-checkbox>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Diagnostik
+          </mat-panel-title>
+          <div *ngIf="docUebersicht.controls.diagnostikDate.value">
+            <mat-panel-description>
+              durchgeführt am - {{ docUebersicht.controls.diagnostikDate.value | date }}
+            </mat-panel-description>
+          </div>
+        </mat-expansion-panel-header>
+        <mat-form-field class="full-with-field">
+            <input matInput formControlName="diagnostikDate" [matDatepicker]="diagnostikPicker" placeholder="Datum">
+            <mat-datepicker-toggle matSuffix [for]="diagnostikPicker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #diagnostikPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-checkbox formControlName="diagnostikPayed" class="full-with-field">bezahlt</mat-checkbox>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Elterngespräch
+          </mat-panel-title>
+          <div *ngIf="docUebersicht.controls.elternDate.value">
+            <mat-panel-description>
+              durchgeführt am - {{ docUebersicht.controls.elternDate.value | date }}
+            </mat-panel-description>
+          </div>
+        </mat-expansion-panel-header>
+        <mat-form-field class="full-with-field">
+            <input matInput formControlName="elternDate" [matDatepicker]="elternPicker" placeholder="Datum">
+            <mat-datepicker-toggle matSuffix [for]="elternPicker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #elternPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-checkbox formControlName="elternPayed" class="full-with-field">bezahlt</mat-checkbox>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <mat-form-field class="full-with-field">
+    <textarea formControlName="problemHierarchy" matInput placeholder="Problemhierarchie"></textarea>
+  </mat-form-field>
+
+  <h2>Terminhistorie</h2>
+  <!-- Unterer Teil -->
+  <button class="m-t-15" mat-raised-button (click)="addReview()" [disabled]="isDisabled == true">neues Review anlegen +</button>
+  <div formArrayName="reviews" class="m-t-15">
+    <mat-accordion class="form-accordion">
+      <div *ngFor="let review of docUebersicht.controls.reviews.controls; let i=index">
+        <!-- auskommentiert werden --prod build !!! <div *ngFor="let review of docUebersicht.controls.reviews.controls; let i=index"> -->
+        <div [formGroupName]="i">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ docUebersicht.controls.reviews.controls[i].controls.name.value }}
+              </mat-panel-title>
+              <mat-panel-description>
+                durchgeführt am - {{ docUebersicht.controls.reviews.controls[i].controls.date.value | date }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-form-field class="full-with-field">
+              <input formControlName="name" matInput placeholder="Name des Eintrags">
+            </mat-form-field>
+            <mat-form-field class="full-with-field">
+              <input matInput formControlName="date" [matDatepicker]="picker" placeholder="Datum">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker touchUi #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="full-with-field">
+              <textarea formControlName="exercises" matInput placeholder="Übungen"></textarea>
+            </mat-form-field>
+            <mat-form-field class="full-with-field">
+              <textarea formControlName="reasons" matInput placeholder="Begründungen"></textarea>
+            </mat-form-field>
+            <mat-checkbox formControlName="payed" class="full-with-field m-b-10">bezahlt</mat-checkbox>
+            <button mat-raised-button (click)="updateReview(review)" class="full-with-field">Review bearbeiten</button>
+            <button mat-raised-button color="warn" (click)="removeReview(review, i)" class="full-with-field m-t-5">Review löschen</button>
+          </mat-expansion-panel>
+        </div>
+      </div>
+    </mat-accordion>
+  </div>
+  <button class="m-t-15" mat-raised-button color="accent" [disabled]="isDisabled == true">Erstellen / Speichern</button>
+</form>
+

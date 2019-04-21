@@ -1,0 +1,60 @@
+<div>
+    <h3>{{testung.name}}</h3>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div *ngFor="let entry of questions | keyvalue:descOrder" class="form-row">
+      <mat-accordion class="form-accordion">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                <label [attr.for]="entry.key.name" class="chapter-label">{{entry.key.name}}</label>
+            </mat-panel-title>
+            <div *ngIf="entry.key.score >= 0">
+              <mat-panel-description>
+                Durschnittlicher Wert = {{entry.key.score}} %
+              </mat-panel-description>
+            </div>
+          </mat-expansion-panel-header>
+            <div *ngFor="let question of entry.value" [formGroupName]="entry.key.id">
+              <label [attr.for]="question.key">{{question.label}}</label>
+
+              <div [ngSwitch]="question.controlType">
+
+                <input *ngSwitchCase="'input'" [formControlName]="question.key"
+                        [id]="question.key" [type]="question.type">
+
+                <select [id]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key">
+                  <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
+                </select>
+
+                <div *ngSwitchCase="'radio'" class="radio-question">
+                  <label *ngFor="let opt of question.options" class="testung-container">
+                    {{opt.key}}
+                    <input
+                      type="radio"
+                      [formControlName]="question.key"
+                      [value]="opt.value"
+                      [checked]="(question.value === opt.value)"
+                      (click)="radioCheckUncheck(opt.value, entry.key, question.key)">
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+
+                <div *ngSwitchCase="'textarea'" class="textarea-question">
+                    <textarea
+                      [formControlName]="question.key"
+                      matInput
+                      placeholder="Bitte eintragen"
+                      [value]="question.value"
+                      >
+                    </textarea>
+                </div>
+              </div>
+            </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  <div class="form-row m-t-5">
+    <button mat-raised-button color="primary" type="submit" class="full-with-field">Speichern</button>
+  </div>
+  </form>
+</div>

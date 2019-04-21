@@ -1,0 +1,36 @@
+<!-- <div>
+<mat-card class="dash-card" (click)="navigate('customers')">
+  <mat-card-header>
+    <mat-card-title>Patienten</mat-card-title>
+    <mat-card-subtitle>Liste</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://st4.depositphotos.com/4799321/20504/v/1600/depositphotos_205045952-stock-illustration-vector-cartoon-checklist-icon-comic.jpg" alt="Patientenliste Icon">
+  <mat-card-content>
+    <p>
+      Auflistung aller Patienten
+    </p>
+  </mat-card-content>
+</mat-card>
+<mat-card class="dash-card" (click)="navigate('documents')">
+  <mat-card-header>
+    <mat-card-title>Dokumente</mat-card-title>
+    <mat-card-subtitle>INPP Unterlagen</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://c8.alamy.com/compde/p80r89/cartoon-dokumentsymbol-im-comic-stil-dokument-dateien-zoom-abbildung-piktogramm-mit-checkliste-zeichen-splash-geschaftskonzept-lupe-p80r89.jpg" alt="Patientenliste Icon">
+  <mat-card-content>
+    <p>
+      Auflistung aller Dokumente
+    </p>
+  </mat-card-content>
+</mat-card>
+</div> -->
+
+<div *ngFor="let group of tileGroups" class="col">
+  <h3>{{group.title}}</h3>
+  <mat-grid-list [cols]="($isHandset | async) ? 1 : 4" rowHeight="100px">
+    <mat-grid-tile *ngFor="let tile of group.tiles" [colspan]="1" [rowspan]="1" [routerLink]="tile.route">
+      <mat-icon *ngIf="tile.icon">{{tile.icon}}</mat-icon>
+      {{tile.title}}
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

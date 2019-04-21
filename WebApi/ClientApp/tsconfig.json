@@ -1,0 +1,32 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es5",
+    "downlevelIteration": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "@rl/utils/authentication": ["libs/utils/authentication/src/index.ts"],
+      "@rl/ui/material": ["libs/ui/material/src/index.ts"],
+      "@rl/ui/grunddaten": ["libs/ui/grunddaten/src/index.ts"],
+      "@rl/ui/antragsdaten": ["libs/ui/antragsdaten/src/index.ts"],
+      "@rl/ui/common-ui": ["libs/ui/common-ui/src/index.ts"],
+      "@rl/shared/models": ["libs/shared/models/src/index.ts"],
+      "@rl/shared/api": ["libs/shared/api/src/index.ts"]
+    }
+  }
+}

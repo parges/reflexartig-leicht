@@ -1,0 +1,31 @@
+.form-container {
+  // display: flex;
+  // flex-direction: column;
+
+  &> * {
+    width: 100%;
+  }
+
+  & button {
+    margin-top: 5px;
+  }
+
+  hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  // button.imgUploader {
+  //   widows: auto;
+  // }
+
+  // .buttonRegion > button{
+  //   float: right;
+  //   margin-left: 10px;
+  // }
+
+
+}
+
+
+
+

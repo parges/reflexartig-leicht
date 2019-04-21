@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "",
+    "appService.deploySubpath": "WebApi\\ClientApp\\dist\\kuba-v3"
+}

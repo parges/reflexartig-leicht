@@ -1,0 +1,160 @@
+<h2>Review</h2>
+
+<form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="form-container" >
+    <div class="row">
+      <div class="col-sm">
+        <mat-form-field class="full-with-field">
+            <input formControlName="fullname" matInput placeholder="Name">
+        </mat-form-field>
+      </div>
+      <div class="col-sm">
+        <mat-form-field class="full-with-field">
+            <input matInput formControlName="date" [matDatepicker]="picker" placeholder="Datum" disabled>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker disabled="false"></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-tab-group>
+      <mat-tab label="Review Details">
+          <mat-accordion class="form-accordion">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <label>1. Allgmeine Beobachtungen</label>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="textarea-review">
+                  <label>Eltern:</label>
+                  <textarea
+                    formControlName="observationsParents"
+                    matInput
+                    placeholder="Bitte eintragen:"
+                    [value]=""
+                    >
+                  </textarea>
+              </div>
+              <div class="textarea-review">
+                  <label>Kind:</label>
+                  <textarea
+                    formControlName="observationsChild"
+                    matInput
+                    placeholder="Bitte eintragen:"
+                    [value]=""
+                    >
+                  </textarea>
+              </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <label>2. Übungsbewältigung</label>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="textarea-review">
+                  <textarea
+                    formControlName="exerciseAccomplishment"
+                    matInput
+                    placeholder="Bitte eintragen:"
+                    [value]=""
+                    >
+                  </textarea>
+              </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <label>3. Problemhierarchie</label>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+                  <div class="row">
+                    <div class="col-sm">
+                      <label>Ursprungsproblem</label>
+                      <div formArrayName="problemHierarchies">
+                        <div *ngFor="let problem of problems; let i=index">
+                            <div [formGroupName]="i">
+                                <mat-form-field class="full-with-field">
+                                    <input formControlName="initialValue" matInput placeholder="Eintrag">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm">
+                        <label>Veränderung</label>
+                        <div formArrayName="problemHierarchies">
+                            <div *ngFor="let problem of problems; let i=index">
+                                <div [formGroupName]="i">
+                                    <mat-form-field class="full-with-field">
+                                        <input formControlName="changedValue" matInput placeholder="Eintrag">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                          </div>
+                    </div>
+                  </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+      </mat-tab>
+      <mat-tab label="Retests (Auswahl)">
+          <button mat-raised-button (click)="openDialog()">Tests wählen</button>
+          <button mat-raised-button (click)="deleteSelectedTests()">Tests zurücksetzen</button>
+          <!-- Review Tests -->
+          <form (ngSubmit)="onSubmit()" [formGroup]="form">
+            <div *ngFor="let entry of questions | keyvalue:descOrder" class="form-row">
+              <mat-accordion class="form-accordion">
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <label [attr.for]="entry.key.name" class="chapter-label">{{entry.key.name}}</label>
+                    </mat-panel-title>
+                    <div *ngIf="entry.key.score >= 0">
+                      <mat-panel-description>
+                        Durschnittlicher Wert = {{entry.key.score}} %
+                      </mat-panel-description>
+                    </div>
+                  </mat-expansion-panel-header>
+                    <div *ngFor="let question of entry.value" [formGroupName]="entry.key.id">
+                      <label [attr.for]="question.key">{{question.label}}</label>
+
+                      <div [ngSwitch]="question.controlType">
+
+                        <input *ngSwitchCase="'input'" [formControlName]="question.key"
+                                [id]="question.key" [type]="question.type">
+
+                        <select [id]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key">
+                          <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
+                        </select>
+
+                        <div *ngSwitchCase="'radio'" class="radio-question">
+                          <label *ngFor="let opt of question.options" class="testung-container">
+                            {{opt.key}}
+                            <input
+                              type="radio"
+                              [formControlName]="question.key"
+                              [value]="opt.value"
+                              [checked]="(question.value === opt.value)"
+                              (click)="radioCheckUncheck(opt.value, entry.key, question.key)">
+                            <span class="checkmark"></span>
+                          </label>
+                        </div>
+
+                        <div *ngSwitchCase="'textarea'" class="textarea-question">
+                            <textarea
+                              [formControlName]="question.key"
+                              matInput
+                              placeholder="Bitte eintragen"
+                              [value]="question.value"
+                              >
+                            </textarea>
+                        </div>
+                      </div>
+                    </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </form>
+      </mat-tab>
+    </mat-tab-group>
+    <button class="m-t-15" mat-raised-button color="accent">Speichern</button>
+</form>
