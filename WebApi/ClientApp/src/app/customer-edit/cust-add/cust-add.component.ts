@@ -33,6 +33,7 @@ export class CustAddComponent {
       'firstname' : ['', Validators.required],
       'lastname' : ['', Validators.required],
       'tele' : ['', Validators.required],
+      'address' : ['', Validators.required],
       'birthday' : ['']
     });
    }
@@ -54,7 +55,7 @@ export class CustAddComponent {
       })
     )
     .subscribe((data: Customer[]) => {
-      // this.$router.navigate(['customers']);
+      this.$router.navigate(['customers']);
     });
   }
 }

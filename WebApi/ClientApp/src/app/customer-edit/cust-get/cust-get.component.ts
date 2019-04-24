@@ -89,7 +89,7 @@ export class CustGetComponent implements OnInit, OnDestroy {
         birthday: this.activeCustomer.birthday,
         age: age,
         avatar: this.activeCustomer.avatar,
-        address: 'Max Mustermann Straße',
+        address: this.activeCustomer.address,
         reviews: this.fillReviews()
       });
     });

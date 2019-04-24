@@ -1,17 +1,14 @@
 https://webapi20190421025740.azurewebsites.net/
 
 Todo next:
-
-- Login machen
-- Umleitung nach Add
+- charts
+- PDF Druck der Dokumente
 
 Todo:
 - Bilder hochladen
 - Alter rechnet falsch?
 - Dashboard Hübsch machen
 - patienten Tabelle suchbar machen
-- Patienten Get / Add
-  - Anschrift
 - neue Kachel
   - Unbezahlte Termine --> Tabelle aller Kunden die etwas unbezahltes haben - bei Auswahl in Fallübersicht Dokument springen
   - Statistiken

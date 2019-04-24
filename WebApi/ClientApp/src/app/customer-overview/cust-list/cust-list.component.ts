@@ -3,7 +3,7 @@ import { ApiResponse } from './../../../../libs/shared/models/src/lib/interfaces
 import { ApiService } from './../../../../libs/shared/api/src/lib/services/api.service';
 import { Customer } from 'src/app/customer/customer';
 import {Component, ViewChild, AfterViewInit, HostListener} from '@angular/core';
-import {MatPaginator, MatSort} from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import {merge, of as observableOf, of} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 import { Router, NavigationExtras } from '@angular/router';
@@ -17,7 +17,8 @@ import { Router, NavigationExtras } from '@angular/router';
 export class CustListComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['firstname', 'lastname', 'tele'];
-  dataSource: Customer[] = [];
+  // dataSource: MatTableDataSource<Customer>[] = [];
+  dataSource: Customer[];
 
   resultsLength = 0;
   isLoadingResults = true;
@@ -53,7 +54,8 @@ export class CustListComponent implements AfterViewInit {
       })
     )
     .subscribe((data: Customer[]) => {
-      this.dataSource = data
+      // this.dataSource = new MatTableDataSource(data);
+      this.dataSource = data;
     });
 
     // merge(this.sort.sortChange, this.paginator.page)
@@ -81,8 +83,12 @@ export class CustListComponent implements AfterViewInit {
     //   });
 
   }
-
+  // applyFilter(filterValue: string) {
+  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+  // }
   showCustomerDetails ( model: Customer, $event: Event ) {
     this.$router.navigate( ['customers/', model.id]);
   }
+
+
 }

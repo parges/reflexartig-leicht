@@ -15,7 +15,7 @@ export const environment = {
   // }
   api: {
     host: 'https://localhost',
-    port: 80,
+    port: 44306,
     suffix: 'api'
   }
 };

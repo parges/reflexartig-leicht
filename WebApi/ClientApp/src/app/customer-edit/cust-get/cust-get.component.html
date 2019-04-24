@@ -19,6 +19,12 @@
         <span *ngIf="!regiForm.get('tele').valid && regiForm.get('tele').touched">Bitte Telefonnummer eingeben</span>
     </mat-error>
   <mat-form-field>
+    <input formControlName="address" matInput placeholder="Adresse">
+  </mat-form-field>
+  <mat-error>
+      <span *ngIf="!regiForm.get('address').valid && regiForm.get('address').touched">Bitte Adresse eingeben</span>
+  </mat-error>
+  <mat-form-field>
       <input matInput formControlName="birthday" [matDatepicker]="picker" placeholder="Geburtstag wählen">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker touchUi #picker></mat-datepicker>

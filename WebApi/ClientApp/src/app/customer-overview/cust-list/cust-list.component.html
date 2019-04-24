@@ -8,7 +8,9 @@
 </div>
 
   <div class="example-table-container">
-
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
     <table mat-table [dataSource]="dataSource" class="example-table"
            matSort matSortActive="firstname" matSortDisableClear matSortDirection="desc">
       <!-- Number Column -->

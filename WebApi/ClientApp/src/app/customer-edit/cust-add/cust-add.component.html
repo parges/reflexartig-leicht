@@ -17,6 +17,12 @@
   <mat-error>
       <span *ngIf="!addCustForm.get('tele').valid && addCustForm.get('tele').touched">Bitte Telefonnummer eingeben</span>
   </mat-error>
+  <mat-form-field>
+    <input formControlName="address" matInput placeholder="Adresse">
+  </mat-form-field>
+  <mat-error>
+      <span *ngIf="!addCustForm.get('address').valid && addCustForm.get('address').touched">Bitte Adresse eingeben</span>
+  </mat-error>
 
   <mat-form-field>
       <input matInput formControlName="birthday" [matDatepicker]="picker" placeholder="Geburtstag wählen">

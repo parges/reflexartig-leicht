@@ -43,14 +43,19 @@ namespace kuba_api.Controllers
         [HttpPost, AllowAnonymous]
         public async Task<IActionResult> GetToken([FromBody]LoginModel loginModel)
         {
-            UserModel userModel = new UserModel()
+            if (loginModel.Username == "danielaparge")
             {
-                Username = "TestUser",
-                EMail = "test@localhost",
-            };
-            var tokenString = BuildToken(userModel);
+                UserModel userModel = new UserModel()
+                {
+                    Username = "TestUser",
+                    EMail = "test@localhost",
+                };
+                var tokenString = BuildToken(userModel);
 
-            return Ok(new { token = tokenString });
+                return Ok(new { token = tokenString });
+            }
+
+            return Unauthorized();
         }
 
         /// <summary>

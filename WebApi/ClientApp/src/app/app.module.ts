@@ -20,7 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SnackbarGenericComponent } from './utils/snackbar-generic/snackbar-generic.component';
-import { environment } from 'src/environments/environment.dev';
+import { environment } from 'src/environments/environment';
 
 
 @NgModule({

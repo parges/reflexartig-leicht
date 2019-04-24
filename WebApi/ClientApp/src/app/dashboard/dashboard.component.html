@@ -25,9 +25,9 @@
 </mat-card>
 </div> -->
 
-<div *ngFor="let group of tileGroups" class="col">
-  <h3>{{group.title}}</h3>
-  <mat-grid-list [cols]="($isHandset | async) ? 1 : 4" rowHeight="100px">
+<div *ngFor="let group of tileGroups" class="col dashboard-gridListRow">
+  <h4>{{group.title}}</h4>
+  <mat-grid-list [cols]="($isHandset | async) ? 1 : 4" rowHeight="100px" >
     <mat-grid-tile *ngFor="let tile of group.tiles" [colspan]="1" [rowspan]="1" [routerLink]="tile.route">
       <mat-icon *ngIf="tile.icon">{{tile.icon}}</mat-icon>
       {{tile.title}}
