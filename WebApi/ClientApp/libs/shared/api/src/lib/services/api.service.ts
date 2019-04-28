@@ -2,7 +2,7 @@ import { ApiResponse } from '@rl/shared/models';
 import { ModuleConfigToken } from './../token';
 import { ApiConfig } from './../interfaces/index';
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -19,6 +19,13 @@ export class ApiService {
 
   public getById<T>(resource: string, id: number): Observable<ApiResponse<T>> {
     return this.http.get<ApiResponse<T>>(`${this.apiConfig.endpoint}/${resource}/${id}`);
+  }
+
+  public downloadDocumentType(resource: string, id: number): Observable<any> {
+    let headers = new HttpHeaders();
+    // headers = headers.append('Accept', 'application/pdf');
+    headers = headers.append('responseType', 'blob');
+    return this.http.get(`${this.apiConfig.endpoint}/${resource}/${id}`, { headers: headers });
   }
 
   public post<T>(resource: string, body: T): Observable<any> {

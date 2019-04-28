@@ -1,3 +1,4 @@
+import { ApiService } from './../../../libs/shared/api/src/lib/services/api.service';
 import { TileGroup } from './../../../libs/shared/models/src/lib/interfaces/interfaces.common';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
@@ -41,8 +42,11 @@ export class DashboardComponent {
     .observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
 
-  constructor(public breakpointObserver: BreakpointObserver) { }
+  constructor(public breakpointObserver: BreakpointObserver, private api: ApiService) { }
+
+
 }
+
 
 
 // import { Router } from '@angular/router';

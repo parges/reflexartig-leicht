@@ -90,7 +90,7 @@ namespace WebApi
             app.UseCors("CorsPolicy");
 
             app.UseHttpsRedirection();
-            /*app.UseStaticFiles();*/
+            app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
             app.UseMvc(routes =>

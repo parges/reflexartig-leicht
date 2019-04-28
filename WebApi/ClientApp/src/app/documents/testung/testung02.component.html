@@ -1,4 +1,5 @@
-<div>
+<div id="printContent" #printContent>
+    <button mat-button (click)="downloadPDF()">Drucken</button>
     <h3>{{testung.name}}</h3>
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
     <div *ngFor="let entry of questions | keyvalue:descOrder" class="form-row">
@@ -55,6 +56,8 @@
     </div>
   <div class="form-row m-t-5">
     <button mat-raised-button color="primary" type="submit" class="full-with-field">Speichern</button>
+
   </div>
   </form>
+
 </div>

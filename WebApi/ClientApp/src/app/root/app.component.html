@@ -4,7 +4,7 @@
 
     <img src="assets/img/LogoINPPv2.png" [routerLink]="['']" style="cursor: pointer;" height="80%" class="mr-2" />
     <span class="flex-fill" style="text-align:center">Reflexartig Leicht</span>
-    <button mat-stroked-button color="accent" *ngIf="(currentUser$ | async)?.token" (click)="logout()">Logout</button>
+    <button mat-raised-button *ngIf="(currentUser$ | async)?.token" (click)="logout()">Logout</button>
   </mat-toolbar-row>
 </mat-toolbar>
 <div class="container-fluid">

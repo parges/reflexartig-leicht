@@ -6,9 +6,9 @@ export const environment = {
     port: 44306,
     suffix: 'api'
   }
-   /*api: {
-     host: 'https://webapi20190421025740.azurewebsites.net',
-     port: 443,
-     suffix: 'api'
-   }*/
+  //  api: {
+  //    host: 'https://webapi20190421025740.azurewebsites.net',
+  //    port: 443,
+  //    suffix: 'api'
+  //  }
 };

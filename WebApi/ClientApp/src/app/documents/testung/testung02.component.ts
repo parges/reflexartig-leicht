@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { TestungChapter } from './../../models/testung';
 import { SnackbarGenericComponent } from './../../utils/snackbar-generic/snackbar-generic.component';
 import { LoaderService } from './../../../../libs/shared/ui/services/loader.service';
@@ -10,9 +11,9 @@ import { Customer } from './../../customer/customer';
 import { TestungFormControlService } from './testung-form-control.service';
 import { FormGroup } from '@angular/forms';
 import { FormBase } from './../../utils/dynamic-forms/form-base';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Testung } from 'src/app/models/testung';
-import { debugOutputAstAsTypeScript } from '@angular/compiler';
+import * as jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-testung02',
@@ -27,10 +28,12 @@ export class Testung02Component implements OnInit {
   form: FormGroup;
   payLoad = '';
   selectedPatient: Customer;
-
   testung: Testung = new Testung();
 
+  @ViewChild('printContent') printContent: ElementRef;
+
   private resource = `testung`;
+  private resoureDoc = `document`;
 
   constructor(private $formService: TestungFormControlService, private api: ApiService, public dialog: MatDialog, private loader: LoaderService,
     private snackbar: SnackbarGenericComponent) {
@@ -100,6 +103,28 @@ export class Testung02Component implements OnInit {
     if (newValue === currentValue) {
       this.form.get(chapter.id.toString()).get(formKey).reset();
     }
+  }
+
+  downloadPDF() {
+    // let doc = new jsPDF();
+
+    // let specialElementHandlers = {
+    //   '#editor': function(element, renderer) {
+    //     return true;
+    //   }
+    // };
+
+    // let content = this.printContent.nativeElement;
+
+    // doc.fromHTML(content.innerHTML, 15, 15, {
+    //   'width': 190,
+    //   'elementHandlers': specialElementHandlers
+    // });
+
+    // doc.save('Testung_' + this.selectedPatient.lastname + '.pdf');
+
+    return this.api.downloadDocumentType(this.resoureDoc, 2);
+
   }
 
 }
