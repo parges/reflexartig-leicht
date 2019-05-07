@@ -28,7 +28,7 @@ import { environment } from 'src/environments/environment';
     AppComponent,
     SnackbarGenericComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

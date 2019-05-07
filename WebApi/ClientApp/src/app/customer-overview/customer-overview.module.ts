@@ -4,9 +4,10 @@ import { MatTableModule, MatPaginatorModule, MatSortModule, MatProgressSpinnerMo
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustListComponent } from './cust-list/cust-list.component';
+import { DebtorListComponent } from './debtor-list/debtor-list.component';
 
 @NgModule({
-  declarations: [CustListComponent],
+  declarations: [CustListComponent, DebtorListComponent],
   imports: [
     CommonModule,
     CustomerModule,
@@ -14,6 +15,7 @@ import { CustListComponent } from './cust-list/cust-list.component';
   ],
   exports: [
     CustListComponent,
+    DebtorListComponent,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule

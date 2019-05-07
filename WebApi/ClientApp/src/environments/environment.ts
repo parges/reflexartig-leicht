@@ -4,25 +4,17 @@
 
 export const environment = {
   production: false,
-  // endpoint: 'http://localhost:3000/customers'
-  /*endpoint: 'https://localhost:44306/api/patient',*/
-  /*endpointUpload: 'https://localhost:44306/api/upload',*/
-  useAuth: false,
-  // api: {
-  //   host: 'https://localhost',
-  //   port: 5001,
-  //   suffix: 'api'
-  // }
-  api: {
-    host: 'https://localhost',
-    port: 44306,
-    suffix: 'api'
-  }
-  // api: {
-  //   host: 'https://webapi20190421025740.azurewebsites.net',
-  //   port: 443,
-  //   suffix: 'api'
-  // }
+  useAuth: true,
+  /*api: {
+     host: 'https://reflexartig-leicht-prod.azurewebsites.net',
+     port: 443,
+     suffix: 'api'
+   }*/
+   api: {
+     host: 'https://localhost',
+     port: 44306,
+     suffix: 'api'
+   }
 };
 
 /*

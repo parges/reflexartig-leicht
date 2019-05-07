@@ -1,11 +1,12 @@
+import { map } from 'rxjs/operators';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { ApiResponse } from '@rl/shared/models';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from './../../../../libs/shared/api/src/lib/services/api.service';
 import { PatientAutocompleteDialog } from './../../utils/patient-external-dialog/patient-external-dialog.component';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
-import { Component, AfterViewInit, Inject, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, Inject, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { UebersichtModel } from './ubersichtModel';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Customer } from 'src/app/customer/customer';
@@ -34,6 +35,7 @@ export interface DialogData {
 })
 export class Uebersicht00Component implements AfterViewInit{
 
+  givenPatientId: number = -1;
 
   docUebersicht: FormGroup;
   formModel: UebersichtModel;
@@ -47,7 +49,7 @@ export class Uebersicht00Component implements AfterViewInit{
   private resource = `patient`;
   private resourceReview = `review`;
 
-  constructor(private api: ApiService, private fb: FormBuilder, public dialog: MatDialog, public snackbar: SnackbarGenericComponent, private router: Router) {
+  constructor(private api: ApiService, private route: ActivatedRoute, private fb: FormBuilder, public dialog: MatDialog, public snackbar: SnackbarGenericComponent, private router: Router) {
     this.docUebersicht = this.fb.group({
       id : [''],
       firstname : ['', Validators.required],
@@ -64,11 +66,28 @@ export class Uebersicht00Component implements AfterViewInit{
       problemHierarchy: [''],
       reviews : this.fb.array([])
     });
-
     this.enableControlStates(false);
-
-    this.openDialog();
-   }
+    this.route.params.subscribe(params => {
+      if (params['patientId']) {
+        this.givenPatientId = params['patientId'];
+        this.api.getById<Customer>(this.resource, this.givenPatientId)
+        .pipe(
+          map((response: ApiResponse<Customer>) => {
+            return response.items[0];
+          })
+        )
+        .subscribe((patient: Customer) =>
+        {
+          this.isDisabled = false;
+          this.activeCustomer = patient;
+          this.initFormGroupWithData();
+        });
+      }
+    });
+    if ( this.givenPatientId === -1) {
+      this.openDialog();
+    }
+  }
 
    ngAfterViewInit() {
 

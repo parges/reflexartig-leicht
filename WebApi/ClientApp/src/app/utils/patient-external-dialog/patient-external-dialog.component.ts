@@ -34,7 +34,7 @@ export class PatientAutocompleteDialog {
         .pipe(
           startWith({}),
         switchMap(() => {
-          return this.api.get<Customer>(this.resource);
+          return this.api.getAction<Customer>(this.resource, "GetAll");
         })
         ).subscribe(resp => {
           this.patients = resp.items;

@@ -12,6 +12,7 @@ import { CustListComponent } from './customer-overview/cust-list/cust-list.compo
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { DebtorListComponent } from './customer-overview/debtor-list/debtor-list.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
     component: CustListComponent,
     canActivate: [AuthGuard]
   },
+  { path: 'debtors', component: DebtorListComponent, canActivate: [AuthGuard] },
   { path: 'customers/add', component: CustAddComponent, canActivate: [AuthGuard] },
   { path: 'customers/:id', component: CustGetComponent, canActivate: [AuthGuard] },
   { path: 'documents', component: OverviewTableComponent, canActivate: [AuthGuard] },

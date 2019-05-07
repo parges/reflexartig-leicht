@@ -10,7 +10,6 @@ Todo:
 - Dashboard Hübsch machen
 - patienten Tabelle suchbar machen
 - neue Kachel
-  - Unbezahlte Termine --> Tabelle aller Kunden die etwas unbezahltes haben - bei Auswahl in Fallübersicht Dokument springen
   - Statistiken
     - Säulendiagramm Button bei Testung Ergebniszusammenfassung
 - Testung:

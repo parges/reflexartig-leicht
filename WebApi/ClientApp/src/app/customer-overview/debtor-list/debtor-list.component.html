@@ -6,7 +6,7 @@
   keine Datensätze gefunden
 </div>
 </div>
-<h2>Patienten</h2>
+<h2>Schuldner</h2>
   <div class="example-table-container">
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
@@ -34,6 +34,11 @@
       <ng-container matColumnDef="tele">
         <th mat-header-cell mat-sort-header *matHeaderCellDef>Telefon</th>
         <td mat-cell *matCellDef="let row">{{row.tele}}</td>
+      </ng-container>
+      <!-- Addresse Column -->
+      <ng-container matColumnDef="address">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Adresse</th>
+        <td mat-cell *matCellDef="let row">{{row.address}}</td>
       </ng-container>
 
       <!-- Created Column -->

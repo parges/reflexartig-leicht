@@ -180,7 +180,7 @@ export class CustGetComponent implements OnInit, OnDestroy {
     this.api.put<Customer>(this.resource, this.activeCustomer.id, result)
     .pipe(
       switchMap(() => {
-        return this.api.get<Customer>(this.resource);
+        return this.api.getAction<Customer>(this.resource, "GetAll");
       }),
       map((data: ApiResponse<Customer>) => {
         this.loader.hideSpinner();

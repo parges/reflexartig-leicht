@@ -37,7 +37,7 @@ export class CustListComponent implements AfterViewInit {
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
 
-    this.api.get<Customer>(this.resource)
+    this.api.getAction<Customer>(this.resource, "GetAll")
     .pipe(
       map((response: ApiResponse<Customer>) => {
         this.loader.hideSpinner();

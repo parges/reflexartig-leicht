@@ -17,6 +17,10 @@ export class ApiService {
     return this.http.get<ApiResponse<T>>(`${this.apiConfig.endpoint}/${resource}`);
   }
 
+  public getAction<T>(resource: string, action: string): Observable<ApiResponse<T>> {
+    return this.http.get<ApiResponse<T>>(`${this.apiConfig.endpoint}/${resource}/${action}`);
+  }
+
   public getById<T>(resource: string, id: number): Observable<ApiResponse<T>> {
     return this.http.get<ApiResponse<T>>(`${this.apiConfig.endpoint}/${resource}/${id}`);
   }

@@ -14,8 +14,8 @@ using rl_contract.Models;
 namespace kuba_api.Controllers
 {
     [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    [Consumes("application/json", "application/json-patch+json", "multipart/form-data")]
     public class PatientController : ControllerBase
     {
         private readonly DBContext _context;
@@ -38,7 +38,8 @@ namespace kuba_api.Controllers
 
         // GET: api/Patient
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [ActionName("GetAll")]
+        public async Task<IActionResult> Get()
         {
             List<Patient> list = _context.Patients.Include(x => x.Reviews).ToList();
             // Order by Date ASC
@@ -52,8 +53,21 @@ namespace kuba_api.Controllers
             return Ok(response);
         }
 
+        [HttpGet]
+        [ActionName("GetAllDebtors")]
+        public async Task<IActionResult> GetAllDebtors()
+        {
+            List<Patient> list = _context.Patients.Include(x => x.Reviews)
+                .Where(x=> x.AnamnesePayed == false || x.DiagnostikPayed == false || x.ElternPayed == false || x.Reviews.Any(y=> y.Payed==false))
+                .ToList();
+            QueryResponse<Patient> response = new QueryResponse<Patient>();
+            response.Items = list;
+            response.TotalRecords = list.Count;
+            return Ok(response);
+        }
+
         // GET: api/Patient/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             var item = _context.Patients.Where(x => x.Id == id).Include(x => x.Reviews).ToList();

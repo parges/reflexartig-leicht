@@ -22,6 +22,10 @@ export class DashboardComponent {
           route: ['customers']
         },
         {
+          title: 'Schuldner anzeigen',
+          route: ['debtors']
+        },
+        {
           title: 'Patient anlegen',
           route: ['customers/add']
         }

@@ -3,8 +3,8 @@ export const environment = {
   production: true,
   useAuth: true,
   api: {
-    host: 'https://localhost',
-    port: 44306,
+    host: 'https://reflexartig-leicht-prod.azurewebsites.net',
+    port: 443,
     suffix: 'api'
   }
   /*api: {

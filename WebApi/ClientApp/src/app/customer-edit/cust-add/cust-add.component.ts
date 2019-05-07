@@ -43,7 +43,7 @@ export class CustAddComponent {
     this.api.post<Customer>(this.resource, result)
     .pipe(
       switchMap(() => {
-        return this.api.get<Customer>(this.resource);
+        return this.api.getAction<Customer>(this.resource, "GetAll");
       }),
       map((data: ApiResponse<Customer>) => {
         this.loader.hideSpinner();
