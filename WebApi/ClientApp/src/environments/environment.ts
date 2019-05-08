@@ -5,11 +5,11 @@
 export const environment = {
   production: false,
   useAuth: true,
-  /*api: {
-     host: 'https://reflexartig-leicht-prod.azurewebsites.net',
-     port: 443,
-     suffix: 'api'
-   }*/
+  // api: {
+  //    host: 'https://reflexartig-leicht-prod.azurewebsites.net',
+  //    port: 443,
+  //    suffix: 'api'
+  //  }
    api: {
      host: 'https://localhost',
      port: 44306,

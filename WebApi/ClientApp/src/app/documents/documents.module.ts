@@ -12,10 +12,11 @@ import { CommonModule } from '@angular/common';
 import { OverviewTableComponent } from './overview-table/overview-table.component';
 import { ReviewComponent } from './review/review.component';
 import { ReviewDialogComponent } from './review/review-dialog/review-dialog.component';
+import { ChartDialogComponent } from '../utils/chart-dialog/chart-dialog.component';
 
 @NgModule({
   // tslint:disable-next-line:max-line-length
-  declarations: [OverviewTableComponent, Anamnese01Component, Testung02Component, Uebersicht00Component, PatientAutocompleteDialog, TestungChildrenComponent, ReviewComponent, ReviewDialogComponent ],
+  declarations: [OverviewTableComponent, Anamnese01Component, Testung02Component, Uebersicht00Component, PatientAutocompleteDialog, TestungChildrenComponent, ReviewComponent, ReviewDialogComponent, ChartDialogComponent ],
   imports: [
     CommonModule,
     MatTableModule,
@@ -30,7 +31,7 @@ import { ReviewDialogComponent } from './review/review-dialog/review-dialog.comp
   ],
   exports: [
   ],
-  entryComponents: [PatientAutocompleteDialog, ReviewDialogComponent],
+  entryComponents: [PatientAutocompleteDialog, ReviewDialogComponent, ChartDialogComponent],
 
 })
 export class DocumentsModule { }

@@ -21,6 +21,7 @@ export interface TestungChapter
 {
     id: number | null;
     name: string;
+    shortName: string;
     score: number | null;
     questions: TestungQuestion[];
     testungId: number | null;

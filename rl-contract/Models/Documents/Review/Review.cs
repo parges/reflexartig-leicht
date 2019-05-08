@@ -48,6 +48,7 @@ namespace rl_contract.Models.Review
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int? Id { get; set; }
         public string Name { get; set; }
+        public string ShortName { get; set; }
         public int? Score { get; set; }
 
         public List<ReviewQuestion> Questions { get; set; }

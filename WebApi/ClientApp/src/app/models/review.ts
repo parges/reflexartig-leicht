@@ -37,6 +37,7 @@ export interface ReviewChapter
 {
     id: number | null;
     name: string;
+    shortName: string;
     score: number | null;
 
     questions: ReviewQuestion[];

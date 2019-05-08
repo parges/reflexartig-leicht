@@ -22,7 +22,7 @@ export class DashboardComponent {
           route: ['customers']
         },
         {
-          title: 'Schuldner anzeigen',
+          title: 'Offene Forderungen anzeigen',
           route: ['debtors']
         },
         {

@@ -152,20 +152,21 @@ namespace rl_bl
             TestungChapter firstChapter = new TestungChapter
             {
                 Name = "I. TESTS ZUR ÜBERPRÜFUNG DER GROBMOTORISCHEN KOORDINAION UND DES GLEICHGEWICHTS",
+                ShortName = "GROBMOTORISCHE KOORDINATION UND GLEICHGEWICHT",
                 TestungId = testungId
             };
             TestungChapter[] chapters = new TestungChapter[]
             {
                 new TestungChapter { Name = "II. TESTS ZUR MOTORISCHEN ENTWICKLUNG", TestungId = testungId, Score = -1},
-                new TestungChapter { Name = "III. TESTS ZUR ÜBERPRÜFUNG VON KLEINHIRNFUNKTIONEN", TestungId = testungId, Score = -1 },
-                new TestungChapter { Name = "IV. TESTS ZUR DYSDIADOCHOKINESE", TestungId = testungId, Score = -1 },
+                new TestungChapter { Name = "III. TESTS ZUR ÜBERPRÜFUNG VON KLEINHIRNFUNKTIONEN", ShortName = "KLEINHIRNFUNKTIONEN", TestungId = testungId, Score = -1 },
+                new TestungChapter { Name = "IV. TESTS ZUR DYSDIADOCHOKINESE", ShortName = "DYSDIADOCHOKINESE", TestungId = testungId, Score = -1 },
                 new TestungChapter { Name = "V. LINKS-RECHTS-DISKRIMINIERUNGSPROBLEME", TestungId = testungId, Score = -1 },
                 new TestungChapter { Name = "VI. ORIENTIERUNGSPROBLEME", TestungId = testungId, Score = -1 },
                 new TestungChapter { Name = "VII. RÄUMLICHE WAHRNEHMUNGSPROBLEME", TestungId = testungId, Score = -1 },
-                new TestungChapter { Name = "VIII. TESTS ZU ABERRANTEN REFLEXEN", TestungId = testungId, Score = -1 },
+                new TestungChapter { Name = "VIII. TESTS ZU ABERRANTEN REFLEXEN", ShortName = "ABERRANTEN REFLEXEN", TestungId = testungId, Score = -1 },
                 new TestungChapter { Name = "IX. TESTS ZUR SEITIGKEITSÜBERPRÜFUNG", TestungId = testungId, Score = -1 },
-                new TestungChapter { Name = "X. ÜBERPRÜFUNG DER AUGENMUSKELMOTORIK", TestungId = testungId, Score = -1 },
-                new TestungChapter { Name = "XI. VISUELLE WAHRNEHMUNGSÜBERPRÜFUNG", TestungId = testungId, Score = -1 },
+                new TestungChapter { Name = "X. ÜBERPRÜFUNG DER AUGENMUSKELMOTORIK", ShortName = "AUGENMUSKELMOTORIK", TestungId = testungId, Score = -1 },
+                new TestungChapter { Name = "XI. VISUELLE WAHRNEHMUNGSÜBERPRÜFUNG", ShortName = "VISUELLE WAHRNEHMUNGSÜBERPRÜFUNG", TestungId = testungId, Score = -1 },
                 new TestungChapter { Name = "ZUSÄTZLICHE BEOBACHTUNGEN UND NOTIZEN", TestungId = testungId, Score = -1 },
                 new TestungChapter { Name = "ERGEBNISZUSAMMENFASSUNG", TestungId = testungId, Score = -1 }
             };

@@ -1,3 +1,4 @@
+import { ChartDialogComponent } from './../../utils/chart-dialog/chart-dialog.component';
 import { HttpHeaders } from '@angular/common/http';
 import { TestungChapter } from './../../models/testung';
 import { SnackbarGenericComponent } from './../../utils/snackbar-generic/snackbar-generic.component';
@@ -29,6 +30,10 @@ export class Testung02Component implements OnInit {
   payLoad = '';
   selectedPatient: Customer;
   testung: Testung = new Testung();
+
+  possibleColors: string[] = ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'];
+
+
 
   @ViewChild('printContent') printContent: ElementRef;
 
@@ -64,8 +69,35 @@ export class Testung02Component implements OnInit {
           this.questions = this.$formService.getFormEntries(this.testung);
           this.form = this.$formService.toFormGroup(this.questions);
         });
+
+
       }
       });
+  }
+  showBarChart() {
+    var _labels: string[] = [];
+    var _data: number[] = [];
+    var _bgColor: string[] = []
+    var _borderColor: string[] = []
+    this.testung.chapters.forEach(c => {
+      if(c.score > -1) {
+        _bgColor.push(this.possibleColors[_labels.length]);
+        _labels.push(c.name.slice(0, c.name.indexOf(".")));
+        _data.push(c.score);
+      }
+    });
+
+    const dialogRef = this.dialog.open(ChartDialogComponent, {
+      height: 'auto',
+      width: '80%',
+      data: {
+        title: 'Testung Chart',
+        datasetLabel: 'Bewertung',
+        labels: _labels,
+        rows: _data,
+        bgColor: _bgColor,
+      }
+    });
   }
 
   onSubmit() {

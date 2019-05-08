@@ -197,17 +197,17 @@ namespace rl_bl.Context
             modelBuilder.Entity<TestungChapter>(r =>
             {
                 r.HasData(
-                    new { Id = 1, Name = "I. TESTS ZUR ÜBERPRÜFUNG DER GROBMOTORISCHEN KOORDINAION UND DES GLEICHGEWICHTS", TestungId = 1},
+                    new { Id = 1, Name = "I. TESTS ZUR ÜBERPRÜFUNG DER GROBMOTORISCHEN KOORDINATION UND GLEICHGEWICHT", ShortName= "GROBMOTORISCHE KOORDINATION UND GLEICHGEWICHT", TestungId = 1},
                     new { Id = 2, Name = "II. TESTS ZUR MOTORISCHEN ENTWICKLUNG", TestungId = 1 },
-                    new { Id = 3, Name = "III. TESTS ZUR ÜBERPRÜFUNG VON KLEINHIRNFUNKTIONEN", TestungId = 1 },
-                    new { Id = 4, Name = "IV. TESTS ZUR DYSDIADOCHOKINESE", TestungId = 1 },
+                    new { Id = 3, Name = "III. TESTS ZUR ÜBERPRÜFUNG VON KLEINHIRNFUNKTIONEN", ShortName = "KLEINHIRNFUNKTIONEN", TestungId = 1 },
+                    new { Id = 4, Name = "IV. TESTS ZUR DYSDIADOCHOKINESE", ShortName = "DYSDIADOCHOKINESE", TestungId = 1 },
                     new { Id = 5, Name = "V. LINKS-RECHTS-DISKRIMINIERUNGSPROBLEME", TestungId = 1 },
                     new { Id = 6, Name = "VI. ORIENTIERUNGSPROBLEME", TestungId = 1 },
                     new { Id = 7, Name = "VII. RÄUMLICHE WAHRNEHMUNGSPROBLEME", TestungId = 1 },
-                    new { Id = 8, Name = "VIII. TESTS ZU ABERRANTEN REFLEXEN", TestungId = 1 },
+                    new { Id = 8, Name = "VIII. TESTS ZU ABERRANTEN REFLEXEN", ShortName = "ABERRANTEN REFLEXEN", TestungId = 1 },
                     new { Id = 9, Name = "IX. TESTS ZUR SEITIGKEITSÜBERPRÜFUNG", TestungId = 1 },
-                    new { Id = 10, Name = "X. ÜBERPRÜFUNG DER AUGENMUSKELMOTORIK", TestungId = 1 },
-                    new { Id = 11, Name = "XI. VISUELLE WAHRNEHMUNGSÜBERPRÜFUNG", TestungId = 1 },
+                    new { Id = 10, Name = "X. ÜBERPRÜFUNG DER AUGENMUSKELMOTORIK", ShortName = "AUGENMUSKELMOTORIK", TestungId = 1 },
+                    new { Id = 11, Name = "XI. VISUELLE WAHRNEHMUNGSÜBERPRÜFUNG", ShortName = "visuelle Wahrnehmungsprüfung", TestungId = 1 },
                     new { Id = 12, Name = "ZUSÄTZLICHE BEOBACHTUNGEN UND NOTIZEN", TestungId = 1 },
                     new { Id = 13, Name = "ERGEBNISZUSAMMENFASSUNG", TestungId = 1 }
                 );

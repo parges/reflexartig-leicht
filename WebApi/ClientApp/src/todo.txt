@@ -1,23 +1,17 @@
 https://webapi20190421025740.azurewebsites.net/
 
 Todo next:
-- charts
 - PDF Druck der Dokumente
 
 Todo:
 - Bilder hochladen
 - Alter rechnet falsch?
-- Dashboard Hübsch machen
 - patienten Tabelle suchbar machen
-- neue Kachel
-  - Statistiken
-    - Säulendiagramm Button bei Testung Ergebniszusammenfassung
 - Testung:
   - Ergebniszusammenfassung füllen nach Speichern (Kapitelwerte)
   - Ergebniszusammenfassung die Werte sind keine Fragen, alle werden errechnet
 Dokumente:
 - Drucken aller Dokumente (Formulare)
-- Herunterladen aller Druckvorlagen
 Später:
 - Einscannen / Hochladen von Bildern (Rezepten)
 
