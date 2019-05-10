@@ -21,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SnackbarGenericComponent } from './utils/snackbar-generic/snackbar-generic.component';
 import { environment } from 'src/environments/environment';
+import { FileService } from './utils/services/files.services';
 
 
 @NgModule({
@@ -54,8 +55,10 @@ import { environment } from 'src/environments/environment';
 
   // },
   providers: [
+    FileService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true }
+
   ],
   bootstrap: [AppComponent]
 })

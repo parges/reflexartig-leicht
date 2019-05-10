@@ -34,6 +34,8 @@ namespace rl_bl.Context
         public DbSet<AnamneseChapter> AnamneseChapters { get; set; }
         public DbSet<AnamneseQuestion> AnamneseQuestions { get; set; }
 
+        public DbSet<FileData> FileDatas { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

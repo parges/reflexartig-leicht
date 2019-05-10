@@ -2,7 +2,7 @@ import { ApiResponse } from '@rl/shared/models';
 import { ModuleConfigToken } from './../token';
 import { ApiConfig } from './../interfaces/index';
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -15,6 +15,9 @@ export class ApiService {
 
   public get<T>(resource: string): Observable<ApiResponse<T>> {
     return this.http.get<ApiResponse<T>>(`${this.apiConfig.endpoint}/${resource}`);
+  }
+  public getRaw<T>(resource: string): Observable<T> {
+    return this.http.get<T>(`${this.apiConfig.endpoint}/${resource}`);
   }
 
   public getAction<T>(resource: string, action: string): Observable<ApiResponse<T>> {
@@ -53,5 +56,11 @@ export class ApiService {
   }
   public deleteAction<T>(resource: string, action: string, id: number): Observable<any> {
     return this.http.delete(`${this.apiConfig.endpoint}/${resource}/${action}/${id}`);
+  }
+
+  public getImage(resource: string, fileName: string): Observable<Blob> {
+    const queryParams = new HttpParams()
+      .set('filename', fileName);
+    return this.http.get(`${this.apiConfig.endpoint}/${resource}`, { params: queryParams, responseType: 'blob' });
   }
 }

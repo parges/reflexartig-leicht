@@ -9,8 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from 'src/app/customer/customer';
 
 import { MAT_DATE_LOCALE} from '@angular/material/core';
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { of, timer } from 'rxjs';
+import { of, Observable } from 'rxjs';
+import { FileService } from 'src/app/utils/services/files.services';
 
 @Component({
   selector: 'app-cust-get',
@@ -38,7 +38,9 @@ export class CustGetComponent implements OnInit, OnDestroy {
 
   private resource = `patient`;
 
-  @ViewChild("uploader") uploader: any;
+  @ViewChild('fileInput') fileInput:any;
+
+  private avatarNativeElem: HTMLInputElement;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +48,9 @@ export class CustGetComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private api: ApiService,
     private loader: LoaderService,
-    public snackbar: SnackbarGenericComponent) {
+    public snackbar: SnackbarGenericComponent,
+    private fileService: FileService
+    ) {
     this.formBuilder = fb;
     this.regiForm = this.formBuilder.group({
       id : [''],
@@ -55,7 +59,6 @@ export class CustGetComponent implements OnInit, OnDestroy {
       tele : ['', Validators.required],
       birthday : [''],
       age : [''],
-      avatar : [''],
       address : [''],
       reviews : this.fb.array([])
     });
@@ -77,7 +80,9 @@ export class CustGetComponent implements OnInit, OnDestroy {
     )
     .subscribe((data: Customer[]) => {
       this.activeCustomer = data[0];
-      // Calculate the age
+      this.getImageFromService(this.activeCustomer.avatar);
+
+        // Calculate the age
       const timeDiff = Math.abs(Date.now() - new Date(this.activeCustomer.birthday).getTime());
       const age = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
       // To initialize FormGroup
@@ -88,43 +93,11 @@ export class CustGetComponent implements OnInit, OnDestroy {
         tele: this.activeCustomer.tele,
         birthday: this.activeCustomer.birthday,
         age: age,
-        avatar: this.activeCustomer.avatar,
         address: this.activeCustomer.address,
         reviews: this.fillReviews()
       });
     });
-
-    //   this.$customer.getCustomerByID(this.id)
-    //   .then(cust => {
-    //     this.activeCustomer = cust;
-    //     // Calculate the age
-    //     const timeDiff = Math.abs(Date.now() - new Date(this.activeCustomer.birthday).getTime());
-    //     const age = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
-    //     // To initialize FormGroup
-    //     this.regiForm.setValue({
-    //       id: this.activeCustomer.id,
-    //       firstname: this.activeCustomer.firstname,
-    //       lastname: this.activeCustomer.lastname,
-    //       tele: this.activeCustomer.tele,
-    //       birthday: this.activeCustomer.birthday,
-    //       age: age,
-    //       avatar: this.activeCustomer.avatar,
-    //       address: 'Max Mustermann Straße',
-    //       reviews: this.fillReviews()
-    //     });
-    //   })
-    //   .then(cust => {
-    //     this.isImageLoading = true;
-
-    //     this.$customer.getImageByFilename(this.activeCustomer.id).subscribe(data => {
-    //       this.createImageFromBlob(data);
-    //       this.isImageLoading = false;
-    //     }, error => {
-    //       this.isImageLoading = false;
-    //       console.log(error);
-    //     });
-    //   });
-     });
+    });
   }
 
   fillReviews(): FormGroup {
@@ -152,17 +125,6 @@ export class CustGetComponent implements OnInit, OnDestroy {
     });
   }
 
-  createImageFromBlob(image: Blob) {
-     let reader = new FileReader();
-     reader.addEventListener("load", () => {
-        this.imageToShow = reader.result;
-     }, false);
-
-     if (image) {
-        reader.readAsDataURL(image);
-     }
-  }
-
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
@@ -177,27 +139,43 @@ export class CustGetComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     const result: Customer = Object.assign({}, this.regiForm.value);
-    this.api.put<Customer>(this.resource, this.activeCustomer.id, result)
-    .pipe(
-      switchMap(() => {
-        return this.api.getAction<Customer>(this.resource, "GetAll");
-      }),
-      map((data: ApiResponse<Customer>) => {
-        this.loader.hideSpinner();
-        return data.items;
-      }),
-      catchError(() => {
-        this.loader.hideSpinner();
-        return of([]);
-      })
-    )
-    .subscribe(() => {
-      this.snackbar.openSnackBar("Gespeichert");
-      // const source = timer(1);
-      // const subscribe = source.subscribe(() => {
-      this.$router.navigate(['customers']);
-      // });
-    });
+    // this.updateUserFromForm(result);
+    if(this.avatarNativeElem == null) {
+      result.avatar = this.activeCustomer.avatar;
+      this.updateUserFromForm(result);
+    }else {
+      this.fileService.upload(this.avatarNativeElem.files[0]).subscribe(
+        data => {
+          result.avatar = data.fileName;
+          this.updateUserFromForm(result);
+        }
+       );
+    }
+  }
+
+  updateUserFromForm(cust: Customer) {
+    this.api.put<Customer>(this.resource, this.activeCustomer.id, cust)
+            .pipe(
+              // switchMap(() => {
+              //   debugger;
+              //   return this.api.getAction<Customer>(this.resource, "GetAll");
+              // }),
+              map((data: ApiResponse<Customer>) => {
+                this.loader.hideSpinner();
+                return data.items;
+              }),
+              catchError(() => {
+                this.loader.hideSpinner();
+                return of([]);
+              })
+            )
+            .subscribe(() => {
+              this.snackbar.openSnackBar("Gespeichert");
+              // const source = timer(1);
+              // const subscribe = source.subscribe(() => {
+              this.$router.navigate(['customers']);
+              // });
+            });
   }
 
   // Executed When Form Is Submitted
@@ -208,4 +186,29 @@ export class CustGetComponent implements OnInit, OnDestroy {
       this.$router.navigate(['customers']);
     });
   }
+
+  uploadPhoto() {
+    this.avatarNativeElem = this.fileInput.nativeElement;
+  }
+
+  getImageFromService(avatarFileName: string) {
+    this.isImageLoading = true;
+    this.api.getImage('filedata', avatarFileName).subscribe(data => {
+      this.createImageFromBlob(data);
+      this.isImageLoading = false;
+    }, error => {
+      this.isImageLoading = false;
+    });
+  }
+
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+       this.imageToShow = reader.result;
+    }, false);
+
+    if (image) {
+       reader.readAsDataURL(image);
+    }
+   }
 }

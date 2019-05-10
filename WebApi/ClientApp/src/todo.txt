@@ -1,17 +1,16 @@
 https://webapi20190421025740.azurewebsites.net/
 
 Todo next:
-- PDF Druck der Dokumente
+
 
 Todo:
-- Bilder hochladen
 - Alter rechnet falsch?
 - patienten Tabelle suchbar machen
 - Testung:
   - Ergebniszusammenfassung füllen nach Speichern (Kapitelwerte)
   - Ergebniszusammenfassung die Werte sind keine Fragen, alle werden errechnet
 Dokumente:
-- Drucken aller Dokumente (Formulare)
+- PDF Drucken aller Dokumente
 Später:
 - Einscannen / Hochladen von Bildern (Rezepten)
 

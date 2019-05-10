@@ -36,15 +36,23 @@
 
   <!-- <button mat-stroked-button color="primary" class="imgUploader" (click)="fileInput.click()">Bild</button> -->
   <!-- <app-upload userId={{id}}></app-upload> -->
-  <div class="form-group">
+  <!-- <div class="form-group">
     <label for="avatar">Avatar</label>
     <input type="file" #uploader class="form-control" (change)="fileChange(uploader.files)" placeholder="Upload Avatar">
 </div>
 <img [src]="imageToShow"
      alt="Place image title"
-     >
+     > -->
+
+<input type="file" class="form-control" (change)="uploadPhoto()" #fileInput>
+<img [src]="imageToShow" class="avatarImage" alt="Place image title"> <!--*ngIf="!isImageLoading">-->
+<!-- <ng-template #noImageFound>
+     <img src="assets/img/Profile_avatar_placeholder_large.png" alt="Fallbackimage">
+</ng-template> -->
 
 <hr>
   <button mat-raised-button color="primary" type="submit" [disabled]="!regiForm.valid">Speichern</button>
   <button mat-button color="warn" [disabled]="!regiForm.valid" (click)="onDeleteCustomer()">Löschen</button>
 </form>
+
+

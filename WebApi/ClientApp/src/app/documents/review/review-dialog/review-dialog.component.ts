@@ -41,7 +41,6 @@ export class ReviewDialogComponent implements OnInit {
         .pipe(
           map((returnData: ApiResponse<Testung>) => {
             this.loader.hideSpinner();
-            debugger;
             returnData.items[0].chapters = returnData.items[0].chapters.sort((a, b) => b.score - a.score);
             this.testung = returnData.items[0];
           })

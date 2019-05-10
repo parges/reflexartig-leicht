@@ -75,13 +75,11 @@ export class Anamnese01Component implements OnInit {
         question.value = this.form.get(chapter.id.toString()).value["question_" + index];
         var meta = this.form.get(chapter.id.toString()).value["question_" + index+"_meta"] || '';
         if(meta.length > 0){
-          debugger;
           question.textValue = meta;
         }
         index++;
       })
     });
-    debugger;
     this.api.put<Anamnese>(this.resource, this.selectedPatient.id, this.anamnese)
     .pipe(
       map((data: ApiResponse<Anamnese>) => {
