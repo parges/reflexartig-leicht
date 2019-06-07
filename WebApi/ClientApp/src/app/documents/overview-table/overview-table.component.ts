@@ -33,7 +33,7 @@ export class OverviewTableComponent implements OnInit {
   isLoadingResults = true;
   isRateLimitReached = false;
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   private resoure = `document`;
   private resourceFile = `file`;

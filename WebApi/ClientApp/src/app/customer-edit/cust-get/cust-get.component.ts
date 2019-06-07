@@ -38,7 +38,7 @@ export class CustGetComponent implements OnInit, OnDestroy {
 
   private resource = `patient`;
 
-  @ViewChild('fileInput') fileInput:any;
+  @ViewChild('fileInput', { static: true }) fileInput:any;
 
   private avatarNativeElem: HTMLInputElement;
 
@@ -146,12 +146,14 @@ export class CustGetComponent implements OnInit, OnDestroy {
     }else {
       this.fileService.upload(this.avatarNativeElem.files[0]).subscribe(
         data => {
+          debugger;
           result.avatar = data.fileName;
           this.updateUserFromForm(result);
         }
        );
     }
   }
+
 
   updateUserFromForm(cust: Customer) {
     this.api.put<Customer>(this.resource, this.activeCustomer.id, cust)

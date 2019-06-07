@@ -17,7 +17,7 @@ export interface DialogDataChart {
 })
 export class ChartDialogComponent implements OnInit {
 
-  @ViewChild('chart') chartElementRef: ElementRef;
+  @ViewChild('chart', { static: true }) chartElementRef: ElementRef;
   chart : Chart;
 
   constructor(public dialogRef: MatDialogRef<ChartDialogComponent>,

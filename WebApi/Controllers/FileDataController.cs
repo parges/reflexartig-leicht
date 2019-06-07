@@ -58,7 +58,7 @@ namespace WebApi.Controllers
             _context.FileDatas.Add(photo);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(Get), new { name = fileName }, photo);
+            return CreatedAtAction(nameof(Get), new { id = photo.Id }, photo);
         }
     }
 }

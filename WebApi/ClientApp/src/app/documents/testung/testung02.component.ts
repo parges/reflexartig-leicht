@@ -35,7 +35,7 @@ export class Testung02Component implements OnInit {
 
 
 
-  @ViewChild('printContent') printContent: ElementRef;
+  @ViewChild('printContent', { static: false }) printContent: ElementRef;
 
   private resource = `testung`;
   private resoureDoc = `document`;

@@ -25,8 +25,8 @@ export class DebtorListComponent implements AfterViewInit {
 
   private resource = `patient`;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(private $router: Router,  private api: ApiService, private loader: LoaderService) {
   }
